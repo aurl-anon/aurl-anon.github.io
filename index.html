@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js">
+</script>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="That Sounds Right: Auditory Self-Supervision for Dynamic Robot Manipulation">
+  <meta property="og:description" content="That Sounds Right: Auditory Self-Supervision for Dynamic Robot Manipulation">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="That Sounds Right: Auditory Self-Supervision for Dynamic Robot Manipulation">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="That Sounds Right: Auditory Self-Supervision for Dynamic Robot Manipulation">
+  <meta name="twitter:description"
+    content="We propose a new framework to learn dynamic manipulation skills using only audio for supervision.">
+  <meta name="twitter:image" content="./mfiles/arch.jpg" />
+  <link rel="shortcut icon" href="./mfiles/favicon.ico">
+  <link rel="stylesheet" href="css/simple-grid.css">
+  <title>That Sounds Right: Auditory Self-Supervision for Dynamic Robot Manipulation</title>
+</head>
+
+<body>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-13 center">
+          <h1>That Sounds Right: <br> Auditory Self-Supervision for <br> Dynamic Robot Manipulation</h1>
+        </div>
+        <div class="col-3 hidden-sm"></div>
+        <div class="col-2 center">
+          <a style="text-decoration: none" href="" download>
+            <h3 style="color: #336699; margin-top: -30%; margin-bottom:-45%">Paper</h3>
+          </a>
+        </div>
+        <div class="col-2 center">
+          <a style="text-decoration: none" href="https://drive.google.com/drive/folders/1S5zbe_AStdKahhIgBRBpCJsCwvP-2ptc?usp=sharing" download>
+            <h3 style="color: #336699; margin-top: -30%; margin-bottom:-45%">Data</h3>
+          </a>
+        </div>
+        <div class="col-2 center">
+          <a style="text-decoration: none" href="" download>
+            <h3 style="color: #336699; margin-top: -30%; margin-bottom:-45%">Code</h3>
+          </a>
+        </div>
+      </div>
+
+      <!--Abstract-->
+      <div class="row">
+        <div class="col-12">
+          <!-- <h2 class="center m-bottom">Abstract</h2> -->
+          <p>
+            Learning to produce contact-rich, dynamic behaviors from raw sensory data has been a 
+            longstanding challenge in robotics. Prominent approaches primarily focus on using visual or tactile sensing, 
+            where unfortunately one fails to capture high-frequency interaction, while the other can be too delicate for 
+            large-scale data collection. In this work, we propose 'Audio Robot Learning' (<b>AuRL</b>) a data-centric approach to dynamic manipulation that uses an often 
+            ignored source of information: sound. We first collect a dataset of 25k interaction-sound pairs across five dynamic tasks
+            using commodity contact microphones. Then, given this data, we leverage self-supervised learning to accelerate 
+            behavior prediction from sound. Our experiments indicate that this self-supervised 'pretraining' is crucial 
+            to achieving high performance, with a 34.5% lower MSE than plain supervised learning and 
+            a 54.3% lower MSE over visual training. Importantly, we find that when asked to generate desired
+            sound profiles, online rollouts of our models on a UR10 robot can produce dynamic behavior 
+            that achieves an average of 11.5% improvement over supervised learning on audio similarity metrics.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!--Image-->
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+
+          <h2 class="center m-bottom">Dataset</h2>
+          <p>
+            We collect a dataset of 25k interaction-sound pairs across five dynamic tasks using commodity contact microphones placed on and around the robot.
+            </p>
+        </div>
+      
+      </div>
+
+      <div class="row">
+        <!-- <div class="col-1 hidden-sm"></div> -->
+        <div class="col-0-5 hidden-sm"></div>  
+
+        <div class="col-4 ">
+          <iframe height="314" width="268" src="./mfiles/rattle-resynced.mp4" title="YouTube video player" frameborder="0"  style="  overflow: hidden" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-4" style="margin-left:0.5%; margin-right:-2%">
+          <iframe height="314"  width="249" src="./mfiles/tamborine.mp4" title="YouTube video player" frameborder="0" style="overflow: hidden" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        </div>
+        <div class="col-4">
+          <iframe height="313"  width="243" src="./mfiles/fly-swatter-resynced.mp4" title="YouTube video player" frameborder="0"  style="overflow: hidden; padding-top:2px" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-1-5 hidden-sm"></div>  
+          <div class="col-4 hidden-sm">
+            <iframe height="310" width="242" src="./mfiles/striking-H-synced.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+          </div>
+          <div class="col-4 hidden-sm">
+            <iframe height="305"  width="248" src="./mfiles/striking-V.mp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+          </div> 
+
+          </div>
+
+      </div>
+
+
+    </div>
+    <br>
+    <div class="container">
+    <div class="row">
+      <h2 class="center m-bottom">Learning Dynamic Skills from Behavior</h2>
+      <div class="col-12">
+      <p>
+      To learn behaviors with AuRL, we first transform the raw audio waveform into a Mel spectrogram. Then, to learn good representations, we use self-supervised learning on our audio data using the BYOL algorithm. Finally, we train a linear model to predict the behavior primitives on top of the self-supervised representations by minimizing the MSE loss between the predicted actions and the test action using simple supervised training.
+      </p>
+    
+    </div>
+
+      <div class="center img">
+        <img src="./mfiles/arch.jpg" style="max-width:1500px;width:100%" frameborder="0"
+          allowfullscreen/>
+      </div>
+    </div>
+    </div>
+
+    <!--Method-->
+    <div class="container">
+      <div class="row">
+        <h2 class="center m-bottom">Results</h2>
+        <div class="col-12">
+          <p> Our key results are as follows :
+          <ul style="font-size: 1.125rem;font-weight: 200;line-height: 1.8">
+            <li>The self supervised training with AuRL outperforms plain supervised training with 34.5 % lower MSE. Importantly, we also outperform methods that use visual information instead of audio.</li>
+            <li>On our real robot experiments, AuRL shows a 11.5% lower distance between the desired audio and generated audio. </li>
+            <li>In settings where we have limited data for training, self supervised pretraining significantly outperforms regular supervised training.</li>
+          </ul>
+          </p>
+        </div>
+      </div>
+      <div class="row">  
+        <div class="center img">
+          <img src="./mfiles/results.jpg" style="max-width:1500px;width:55%" frameborder="0"
+            allowfullscreen/>
+        </div>
+      </div>
+    
+    </div>
+    
+
+  </div>
+  <footer>
+  </footer>
+</body>
+
+</html>
